@@ -2,7 +2,7 @@ const searchBox = document.querySelector("#searchInput")
 const searchBtn = document.querySelector("#button")
 
 async function getWeather(city) {
-    const url = `https://api.openweathermap.org/data/2.5/weather?lat=26.1906&lon=-97.6961&appid=5b2e002d0c716b2d5fbb418f3eb7fc6f&units=imperial&q= `
+    try{const url = `https://api.openweathermap.org/data/2.5/weather?lat=26.1906&lon=-97.6961&appid=5b2e002d0c716b2d5fbb418f3eb7fc6f&units=imperial&q= `
    const api = await fetch(url + city)
    const data = await api.json();
     console.log(data)
@@ -36,6 +36,13 @@ async function getWeather(city) {
         }
     }
         getEmoji();
+    }catch(error){
+        document.querySelector("#cityName").innerHTML = "Enter a real city!!"
+        document.querySelector("#cityTemp").innerHTML = "🔍";
+        document.querySelector("#emoji").innerHTML = "";
+        document.querySelector("#realFeel").innerHTML ="";
+        document.querySelector("#windSpeed").innerHTML ="";
+    }
 }
 
     searchBtn.addEventListener("click", () =>{
